@@ -1,0 +1,146 @@
+.section {
+  padding-block: var(--section-gap);
+  background: var(--white);
+  border-block: 1px solid var(--light-gray);
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: clamp(56px, 8vw, 88px);
+}
+
+.benefit {
+  padding: 28px;
+  background: var(--light-gray);
+  border-radius: var(--radius);
+  transition: background 0.3s var(--ease);
+}
+
+.benefit:hover {
+  background: var(--paper);
+}
+
+.icon {
+  display: inline-grid;
+  place-items: center;
+  color: var(--tea);
+  transition: color 0.3s;
+}
+
+.benefit:hover .icon {
+  color: var(--ink);
+}
+
+.benefitTitle {
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.benefitDesc {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--gray-ink);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(28px, 5vw, 64px);
+  margin-top: clamp(56px, 8vw, 88px);
+}
+
+.infoTitle {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.charter ul {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.charter li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--gray-ink);
+}
+
+.charter li::before {
+  content: '';
+  position: absolute;
+  top: 0.8em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--tea);
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.faqItem summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 28px 18px 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.faqItem summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 300;
+  color: var(--tea);
+  transition: transform 0.3s var(--ease);
+}
+
+.faqItem[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.faqItem p {
+  padding: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--gray-ink);
+}
+
+.faqNote {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--tea);
+}
+
+@media (max-width: 767px) {
+  .benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .infoGrid {
+    grid-template-columns: 1fr;
+  }
+}

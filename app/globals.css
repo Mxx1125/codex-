@@ -1,0 +1,144 @@
+:root {
+  /* 品牌色彩体系 */
+  --ink: #1a1a1a; /* 墨黑 */
+  --paper: #f5f1ea; /* 宣纸白 */
+  --tea: #8b7355; /* 茶褐 */
+  --indigo: #2c3e50; /* 黛青 */
+  --gray-ink: #4a4a4a; /* 灰墨 */
+  --light-gray: #e8e4dd; /* 浅灰 */
+  --white: #ffffff;
+
+  /* 字体 */
+  --font-serif: "Cormorant Garamond", "Noto Serif SC", "Songti SC", "STSong", "SimSun",
+    serif;
+  --font-sans: "Jost", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui,
+    -apple-system, sans-serif;
+
+  /* 版式 */
+  --maxw: 1440px;
+  --gutter: clamp(20px, 4.5vw, 64px);
+  --section-gap: clamp(72px, 9vw, 120px);
+  --radius: 8px;
+  --header-h: 76px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* 动效时长 */
+  --dur: 0.7s;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.8;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  background: var(--tea);
+  color: var(--paper);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 可见焦点，满足 WCAG 键盘操作 */
+:focus-visible {
+  outline: 2px solid var(--tea);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* 进入视口揭示（由 RevealObserver 添加 .is-visible） */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 屏幕阅读器专用 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 减少动态效果：关闭揭示位移、平滑滚动与循环动画 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* 全面屏安全区 */
+@supports (padding: max(0px)) {
+  .site-footer {
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+  }
+}

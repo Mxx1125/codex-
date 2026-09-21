@@ -1,0 +1,111 @@
+.section {
+  padding-block: var(--section-gap);
+}
+
+.stores {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 48px;
+}
+
+.store {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  padding-block: 24px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.city {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.name {
+  font-size: 15px;
+  color: var(--tea);
+}
+
+.address {
+  margin-top: 8px;
+  font-size: 16px;
+  color: var(--gray-ink);
+}
+
+.hours {
+  flex: none;
+  font-size: 14px;
+  color: var(--tea);
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: clamp(56px, 8vw, 80px);
+}
+
+.social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--tea);
+  transition: color 0.2s;
+}
+
+.social:hover {
+  color: var(--ink);
+}
+
+.socialIcon {
+  display: grid;
+  place-items: center;
+}
+
+.socialName {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.contact {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.email {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  border-bottom: 1px solid var(--tea);
+  padding-bottom: 2px;
+}
+
+.emailNote {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--gray-ink);
+}
+
+@media (max-width: 767px) {
+  .stores {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .store {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .socials {
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,56 @@
+.figure {
+  margin: 0;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--light-gray);
+  border-radius: var(--radius);
+}
+
+.poster,
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video {
+  background: var(--indigo);
+}
+
+.play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(245, 241, 234, 0.7);
+  border-radius: 50%;
+  background: rgba(26, 26, 26, 0.35);
+  color: var(--paper);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.play:hover {
+  background: rgba(26, 26, 26, 0.55);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.caption {
+  margin-top: 12px;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  color: var(--tea);
+}
+
+.notice {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--gray-ink);
+}

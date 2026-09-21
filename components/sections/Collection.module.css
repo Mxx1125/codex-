@@ -1,0 +1,108 @@
+.section {
+  padding-block: var(--section-gap);
+}
+
+.series {
+  margin-top: clamp(40px, 6vw, 60px);
+}
+
+.seriesHead {
+  margin-bottom: 28px;
+}
+
+.seriesTitle {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}
+
+.seriesTitle::before {
+  content: '';
+  flex: none;
+  width: 24px;
+  height: 2px;
+  background: var(--tea);
+}
+
+.seriesTag {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--gray-ink);
+  max-width: 640px;
+}
+
+.looks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.card {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+}
+
+.thumb {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--light-gray);
+}
+
+.img {
+  object-fit: cover;
+  transition: transform 0.4s var(--ease);
+}
+
+/* 仅在支持悬停的精细指针设备上启用缓慢放大 */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .img {
+    transform: scale(1.03);
+  }
+}
+
+.meta {
+  padding: 18px 20px 22px;
+}
+
+.lookId {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: var(--tea);
+}
+
+.lookSeries {
+  margin-top: 6px;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.inspiration {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--gray-ink);
+}
+
+.material {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--tea);
+}
+
+@media (max-width: 767px) {
+  .looks {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
