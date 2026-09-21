@@ -90,11 +90,11 @@
 }
 
 .navLink:hover,
-.navLink[aria-current='location'] {
+.navLink[aria-current='page'] {
   color: var(--ink);
 }
 
-.navLink[aria-current='location']::after {
+.navLink[aria-current='page']::after {
   transform: scaleX(1);
 }
 
@@ -170,7 +170,7 @@
     border-bottom: 1px solid var(--light-gray);
   }
 
-  .menuLink[aria-current='location'] {
+  .menuLink[aria-current='page'] {
     color: var(--tea);
   }
 }

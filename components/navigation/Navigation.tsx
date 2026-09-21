@@ -1,18 +1,22 @@
 'use client';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { navigation } from '@/data/content';
 import styles from './Navigation.module.css';
 
 export default function Navigation() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState('');
   const [progress, setProgress] = useState(0);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
 
-  // 滚动状态与顶部进度条：合并为单一 requestAnimationFrame 循环
+  const isActive = (path: string) =>
+    path === '/' ? pathname === '/' : pathname.startsWith(path);
+
   useEffect(() => {
     let raf = 0;
     const onScroll = () => {
@@ -32,35 +36,14 @@ export default function Navigation() {
     };
   }, []);
 
-  // 当前板块高亮
-  useEffect(() => {
-    const sections = navigation
-      .map((item) => document.getElementById(item.id))
-      .filter((el): el is HTMLElement => el !== null);
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        });
-      },
-      { rootMargin: '-40% 0px -55% 0px' },
-    );
-    sections.forEach((section) => io.observe(section));
-    return () => io.disconnect();
-  }, []);
-
-  // 移动端菜单：滚动锁定、Escape 关闭、焦点管理
   useEffect(() => {
     if (!open) return;
-
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setOpen(false);
     };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
     firstLinkRef.current?.focus();
-
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
@@ -74,23 +57,27 @@ export default function Navigation() {
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.progress} style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
+      <div
+        className={styles.progress}
+        style={{ transform: `scaleX(${progress})` }}
+        aria-hidden="true"
+      />
       <div className={styles.inner}>
-        <a className={styles.brand} href="#top" onClick={() => setOpen(false)}>
+        <Link className={styles.brand} href="/" onClick={() => setOpen(false)}>
           <span className={styles.brandEn}>EXCEPTION</span>
           <span className={styles.brandZh}>例外</span>
-        </a>
+        </Link>
 
         <nav className={styles.nav} aria-label="主导航">
           {navigation.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
+            <Link
+              key={item.path}
+              href={item.path}
               className={styles.navLink}
-              aria-current={active === item.id ? 'location' : undefined}
+              aria-current={isActive(item.path) ? 'page' : undefined}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -111,16 +98,16 @@ export default function Navigation() {
       <div id="mobile-menu" className={`${styles.menu} ${open ? styles.menuOpen : ''}`}>
         <nav aria-label="移动端主导航">
           {navigation.map((item, index) => (
-            <a
-              key={item.id}
+            <Link
+              key={item.path}
               ref={index === 0 ? firstLinkRef : undefined}
-              href={`#${item.id}`}
+              href={item.path}
               className={styles.menuLink}
-              aria-current={active === item.id ? 'location' : undefined}
+              aria-current={isActive(item.path) ? 'page' : undefined}
               onClick={close}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

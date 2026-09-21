@@ -1,5 +1,5 @@
 .section {
-  padding-block: var(--section-gap);
+  padding-bottom: var(--section-gap);
   background: var(--white);
   border-block: 1px solid var(--light-gray);
 }

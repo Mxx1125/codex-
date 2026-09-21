@@ -91,7 +91,7 @@ export default function Hero() {
         )}
       </button>
 
-      <a className={styles.scroll} href="#collection" aria-label="向下滚动至新品展示">
+      <a className={styles.scroll} href="#about" aria-label="向下滚动查看品牌简介">
         <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
           <path
             d="M12 4v14M6 12l6 6 6-6"

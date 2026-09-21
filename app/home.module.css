@@ -1,0 +1,32 @@
+.intro {
+  padding-block: clamp(80px, 12vw, 160px);
+}
+
+.introInner {
+  max-width: 720px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--tea);
+  margin-bottom: 24px;
+}
+
+.sentence {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.sentenceSecondary {
+  margin-top: 20px;
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 2;
+  color: var(--gray-ink);
+}

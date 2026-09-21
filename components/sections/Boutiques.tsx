@@ -1,3 +1,6 @@
+'use client';
+
+import { useMemo, useState } from 'react';
 import { boutiques, type Social } from '@/data/content';
 import SectionHeading from './SectionHeading';
 import styles from './Boutiques.module.css';
@@ -50,25 +53,148 @@ function SocialIcon({ name }: { name: Social['icon'] }) {
 }
 
 export default function Boutiques() {
+  const [search, setSearch] = useState('');
+  const [province, setProvince] = useState('');
+  const [city, setCity] = useState('');
+
+  const selectedProvince = boutiques.provinces.find((p) => p.name === province);
+  const selectedCity = selectedProvince?.cities.find((c) => c.name === city);
+
+  const searchResults = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return [];
+    const results: { province: string; city: string; name: string; address: string; hours: string }[] = [];
+    for (const p of boutiques.provinces) {
+      for (const c of p.cities) {
+        for (const s of c.stores) {
+          if (
+            s.name.toLowerCase().includes(q) ||
+            s.address.toLowerCase().includes(q) ||
+            c.name.toLowerCase().includes(q) ||
+            p.name.toLowerCase().includes(q)
+          ) {
+            results.push({ province: p.name, city: c.name, ...s });
+          }
+        }
+      }
+    }
+    return results;
+  }, [search]);
+
+  const shownStores = useMemo(() => {
+    if (search.trim()) return searchResults;
+    if (selectedCity) {
+      return selectedCity.stores.map((s) => ({ province: province, city: city, ...s }));
+    }
+    if (selectedProvince) {
+      return selectedProvince.cities.flatMap((c) =>
+        c.stores.map((s) => ({ province: province, city: c.name, ...s })),
+      );
+    }
+    return [];
+  }, [search, searchResults, selectedCity, selectedProvince, province, city]);
+
+  const pickProvince = (name: string) => {
+    setProvince(name);
+    setCity('');
+  };
+
+  const resetAll = () => {
+    setSearch('');
+    setProvince('');
+    setCity('');
+  };
+
   return (
-    <section id="boutiques" className={styles.section}>
+    <section className={styles.section}>
       <div className="container">
         <SectionHeading title={boutiques.title} subtitle={boutiques.subtitle} lead={boutiques.intro} />
 
-        <ul className={styles.stores}>
-          {boutiques.stores.map((store) => (
-            <li className={styles.store} key={store.city + store.name} data-reveal>
-              <div>
-                <h3 className={styles.city}>
-                  {store.city}
-                  <span className={styles.name}> · {store.name}</span>
-                </h3>
-                <p className={styles.address}>{store.address}</p>
-              </div>
-              <p className={styles.hours}>{store.hours}</p>
-            </li>
-          ))}
-        </ul>
+        <div className={styles.search} data-reveal>
+          <label htmlFor="store-search" className="sr-only">
+            搜索门店
+          </label>
+          <input
+            id="store-search"
+            type="search"
+            placeholder="搜索门店名称或城市"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          {search && (
+            <button type="button" className={styles.clear} onClick={resetAll}>
+              清除
+            </button>
+          )}
+        </div>
+
+        {!search.trim() && (
+          <div className={styles.selector} data-reveal>
+            <p className={styles.selectorLabel}>省份</p>
+            <div className={styles.chips}>
+              {boutiques.provinces.map((p) => (
+                <button
+                  key={p.name}
+                  type="button"
+                  className={`${styles.chip} ${province === p.name ? styles.chipActive : ''}`}
+                  onClick={() => pickProvince(p.name)}
+                  aria-pressed={province === p.name}
+                >
+                  {p.name}
+                </button>
+              ))}
+            </div>
+
+            {selectedProvince && (
+              <>
+                <p className={styles.selectorLabel}>城市</p>
+                <div className={styles.chips}>
+                  {selectedProvince.cities.map((c) => (
+                    <button
+                      key={c.name}
+                      type="button"
+                      className={`${styles.chip} ${city === c.name ? styles.chipActive : ''}`}
+                      onClick={() => setCity(c.name)}
+                      aria-pressed={city === c.name}
+                    >
+                      {c.name}
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {shownStores.length > 0 && (
+          <ul className={styles.stores}>
+            {shownStores.map((s) => (
+              <li className={styles.store} key={`${s.province}-${s.city}-${s.name}`}>
+                <div className={styles.storeImg} aria-hidden="true">
+                  <span>{s.city}</span>
+                  <small>门店图片待补充</small>
+                </div>
+                <div className={styles.storeBody}>
+                  <h3 className={styles.storeName}>{s.name}</h3>
+                  <p className={styles.storeAddr}>{s.address}</p>
+                  <p className={styles.storeHours}>{s.hours}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {!search.trim() && !province && (
+          <p className={styles.hint} data-reveal>
+            请选择省份与城市，查看对应门店。
+          </p>
+        )}
+
+        {search.trim() && shownStores.length === 0 && (
+          <p className={styles.hint} data-reveal>
+            未找到匹配的门店，请尝试其他关键词。
+          </p>
+        )}
 
         <div className={styles.socials} data-reveal>
           {boutiques.socials.map((social) => (

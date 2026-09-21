@@ -6,7 +6,7 @@ import styles from './Collection.module.css';
 
 export default function Collection() {
   return (
-    <section id="collection" className={styles.section}>
+    <section className={styles.section}>
       <div className="container">
         <SectionHeading title={collection.title} subtitle={collection.subtitle} lead={collection.intro} />
 
@@ -30,25 +30,43 @@ export default function Collection() {
               {series.looks.map((look) => (
                 <article className={styles.card} key={look.id} data-reveal>
                   <div className={styles.thumb}>
-                    <Image
-                      src={look.image}
-                      alt={`${look.series} ${look.id} 服装大片`}
-                      fill
-                      sizes="(min-width: 768px) 50vw, 100vw"
-                      className={styles.img}
-                    />
+                    {look.image ? (
+                      <Image
+                        src={look.image}
+                        alt={`${series.title} ${look.id} 服装大片`}
+                        fill
+                        sizes="(min-width: 900px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className={styles.img}
+                      />
+                    ) : (
+                      <div className={styles.placeholder}>图片待补充</div>
+                    )}
                   </div>
                   <div className={styles.meta}>
                     <p className={styles.lookId}>{look.id}</p>
-                    <p className={styles.lookSeries}>{look.series}</p>
-                    <p className={styles.inspiration}>{look.inspiration}</p>
-                    <p className={styles.material}>{look.material}</p>
+                    <p className={styles.caption}>{look.caption}</p>
                   </div>
                 </article>
               ))}
             </div>
           </div>
         ))}
+
+        <div className={styles.archive} data-reveal>
+          <h3 className={styles.archiveTitle}>
+            {collection.archive.title}
+            <span>{collection.archive.subtitle}</span>
+          </h3>
+          <p className={styles.archiveIntro}>{collection.archive.intro}</p>
+          <ul className={styles.archiveList}>
+            {collection.archive.items.map((item) => (
+              <li key={item.name}>
+                <span>{item.name}</span>
+                <small>{item.note}</small>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
