@@ -56,46 +56,51 @@ export default function Navigation() {
   };
 
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+    <>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
+        <div
+          className={styles.progress}
+          style={{ transform: `scaleX(${progress})` }}
+          aria-hidden="true"
+        />
+        <div className={styles.inner}>
+          <Link className={styles.brand} href="/" onClick={() => setOpen(false)}>
+            <span className={styles.brandEn}>EXCEPTION</span>
+            <span className={styles.brandZh}>例外</span>
+          </Link>
+
+          <nav className={styles.nav} aria-label="主导航">
+            {navigation.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={styles.navLink}
+                aria-current={isActive(item.path) ? 'page' : undefined}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <button
+            ref={toggleRef}
+            type="button"
+            className={`${styles.toggle} ${open ? styles.toggleOpen : ''}`}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? '关闭菜单' : '打开菜单'}
+            onClick={() => setOpen((v) => !v)}
+          >
+            <span />
+            <span />
+          </button>
+        </div>
+      </header>
+
       <div
-        className={styles.progress}
-        style={{ transform: `scaleX(${progress})` }}
-        aria-hidden="true"
-      />
-      <div className={styles.inner}>
-        <Link className={styles.brand} href="/" onClick={() => setOpen(false)}>
-          <span className={styles.brandEn}>EXCEPTION</span>
-          <span className={styles.brandZh}>例外</span>
-        </Link>
-
-        <nav className={styles.nav} aria-label="主导航">
-          {navigation.map((item) => (
-            <Link
-              key={item.path}
-              href={item.path}
-              className={styles.navLink}
-              aria-current={isActive(item.path) ? 'page' : undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <button
-          ref={toggleRef}
-          type="button"
-          className={`${styles.toggle} ${open ? styles.toggleOpen : ''}`}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? '关闭菜单' : '打开菜单'}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span />
-          <span />
-        </button>
-      </div>
-
-      <div id="mobile-menu" className={`${styles.menu} ${open ? styles.menuOpen : ''}`}>
+        id="mobile-menu"
+        className={`${styles.menu} ${open ? styles.menuOpen : ''}`}
+      >
         <nav aria-label="移动端主导航">
           {navigation.map((item, index) => (
             <Link
@@ -111,6 +116,6 @@ export default function Navigation() {
           ))}
         </nav>
       </div>
-    </header>
+    </>
   );
 }

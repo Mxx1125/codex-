@@ -143,6 +143,7 @@
   .menu {
     display: block;
     position: fixed;
+    z-index: 90;
     inset: var(--header-h) 0 0 0;
     background: var(--paper);
     padding: 32px var(--gutter) calc(32px + env(safe-area-inset-bottom));
