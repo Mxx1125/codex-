@@ -49,6 +49,13 @@ export const site = {
   founded: '1996年创立于广州',
   tagline: '传袭再造 · 东方哲学式当代生活艺术',
   description: '中国原创设计品牌',
+  statement: '一个以东方极简美学为底色、以人文温度为核心的高端生活美学品牌。',
+  highlights: [
+    '1996 年创立于广州',
+    '中国原创设计品牌',
+    '传袭再造 · 东方哲学式当代生活艺术',
+    '非遗工艺 × 当代设计',
+  ],
   email: 'contact@example-brand.com',
   copyright: '© 1996-2026 EXCEPTION de MIXMIND',
   footerNote: '生而例外，致当代东方生活',
