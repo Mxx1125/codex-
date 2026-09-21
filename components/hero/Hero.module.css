@@ -40,6 +40,14 @@
   object-fit: cover;
 }
 
+.imgDesktop {
+  display: block;
+}
+
+.imgMobile {
+  display: none;
+}
+
 .video {
   background: var(--indigo);
 }
@@ -151,6 +159,14 @@
 }
 
 @media (max-width: 767px) {
+  .imgDesktop {
+    display: none;
+  }
+
+  .imgMobile {
+    display: block;
+  }
+
   .en {
     font-size: 38px;
   }

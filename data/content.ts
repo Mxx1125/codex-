@@ -66,6 +66,7 @@ export const navigation: NavItem[] = [
 export const hero = {
   videoSrc: '',
   poster: img('/images/hero.jpg'),
+  posterMobile: img('/images/hero-mobile.jpg'),
   nameEn: 'EXCEPTION',
   nameZh: '例外',
   tagline: '传袭再造 · 东方哲学式当代生活艺术',

@@ -57,7 +57,15 @@ export default function Hero() {
               fill
               priority
               sizes="100vw"
-              className={styles.img}
+              className={`${styles.img} ${styles.imgDesktop}`}
+            />
+            <Image
+              src={hero.posterMobile}
+              alt="例外品牌当季形象大片封面"
+              fill
+              priority
+              sizes="100vw"
+              className={`${styles.img} ${styles.imgMobile}`}
             />
           </div>
         )}

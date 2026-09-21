@@ -157,7 +157,7 @@
 
 .philosophyImg {
   position: relative;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background: var(--light-gray);
 }

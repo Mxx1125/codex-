@@ -78,7 +78,7 @@ export default function HomePage() {
           <div className={styles.philosophyGrid}>
             <div className={styles.philosophyImg} data-reveal>
               <Image
-                src={heritage.video.poster}
+                src={heritage.pillars[0].image}
                 alt="生而例外 · 非遗工坊纪实"
                 fill
                 sizes="(min-width: 900px) 50vw, 100vw"
