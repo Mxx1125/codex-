@@ -1,6 +1,9 @@
 // 已确认的页面文案与演示数据。
 // 门店地址、营业时间、真实媒体链接与会员规则以品牌方确认为准，未确认处均明确标注。
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+const img = (path: string) => `${basePath}${path}`;
+
 export type NavItem = {
   id: string;
   label: string;
@@ -80,7 +83,7 @@ export const navigation: NavItem[] = [
 export const hero = {
   // 视频地址待品牌方提供；留空时展示静态封面并关闭真实视频能力
   videoSrc: '',
-  poster: '/images/hero.jpg',
+  poster: img('/images/hero.jpg'),
   nameEn: 'EXCEPTION',
   nameZh: '例外',
   tagline: '传袭再造 · 东方哲学式当代生活艺术',
@@ -93,7 +96,7 @@ export const collection = {
   intro: '自传统而来，落于日常之间。当季衣装以纹样、织造与剪裁，书写东方美学在当下的留白。',
   video: {
     src: '',
-    poster: '/images/collection-video.jpg',
+    poster: img('/images/collection-video.jpg'),
     caption: '当季形象大片 · 系列概念影像（资料待接入）',
   },
   series: [
@@ -106,14 +109,14 @@ export const collection = {
           series: '人文浪漫',
           inspiration: '取意文博纹样的雅致，于衣间书写含蓄情意。',
           material: '苎麻质地，手工刺绣细密如织，纹样灵感取自传统文博图样，针脚之间留有手作温度。',
-          image: '/images/look-renwen-1.jpg',
+          image: img('/images/look-renwen-1.jpg'),
         },
         {
           id: 'LOOK 02',
           series: '人文浪漫',
           inspiration: '传统刺绣针脚的温度，赋予衣装以诗性。',
           material: '天然纤维为底，刺绣针法错落有致，色泽温润如陈年绢帛。',
-          image: '/images/look-renwen-2.jpg',
+          image: img('/images/look-renwen-2.jpg'),
         },
       ],
     },
@@ -126,14 +129,14 @@ export const collection = {
           series: '自然生活',
           inspiration: '草木染色的质朴，将自然意境织入日常。',
           material: '棉麻混纺，手工草木染成，色泽取自植物本真，肌理有呼吸之感。',
-          image: '/images/look-ziran-1.jpg',
+          image: img('/images/look-ziran-1.jpg'),
         },
         {
           id: 'LOOK 04',
           series: '自然生活',
           inspiration: '非遗织造的呼吸感，还原天然材质的本貌。',
           material: '天然麻质，传统织造纹理细腻，染后留有一抹手作的自然晕染。',
-          image: '/images/look-ziran-2.jpg',
+          image: img('/images/look-ziran-2.jpg'),
         },
       ],
     },
@@ -146,14 +149,14 @@ export const collection = {
           series: '都市简约',
           inspiration: '利落剪裁与手工肌理的平衡，为都市生活留出从容。',
           material: '挺括棉质，剪裁利落，细节处以手工编织点缀，克制而耐看。',
-          image: '/images/look-dushi-1.jpg',
+          image: img('/images/look-dushi-1.jpg'),
         },
         {
           id: 'LOOK 06',
           series: '都市简约',
           inspiration: '古法裁剪的从容，融入当代都市的日常节奏。',
           material: '垂坠面料，沿用古法裁剪思路，肩线与衣摆自然流畅，手感温润。',
-          image: '/images/look-dushi-2.jpg',
+          image: img('/images/look-dushi-2.jpg'),
         },
       ],
     },
@@ -165,7 +168,7 @@ export const milestones = {
   subtitle: 'BRAND MILESTONES',
   video: {
     src: '',
-    poster: '/images/milestone-2016.jpg',
+    poster: img('/images/milestone-2016.jpg'),
     caption: '品牌纪录片 · 片段（资料待接入）',
     description:
       '以影像记录品牌自创立以来的重要时刻，从广州出发，至苗艺、清韶、女书与当代东方美学的持续探索。',
@@ -190,7 +193,7 @@ export const milestones = {
       title: '苗艺 · 非遗工艺合作系列',
       description:
         '深入苗地研究传统苗绣的纹样与针法，以当代手法转化为系列设计，让古老技艺重新进入日常着装。',
-      image: '/images/milestone-2015.jpg',
+      image: img('/images/milestone-2015.jpg'),
       imageAlt: '苗艺系列工艺特写',
     },
     {
@@ -198,7 +201,7 @@ export const milestones = {
       title: '清韶 · 文博联名系列',
       description:
         '与文博机构合作，自典藏器物与纹样中提取灵感，以克制的方式完成文博元素向当代衣装的转译。',
-      image: '/images/milestone-2016.jpg',
+      image: img('/images/milestone-2016.jpg'),
       imageAlt: '清韶系列影像',
     },
     {
@@ -206,7 +209,7 @@ export const milestones = {
       title: '女书 · 文化研究系列',
       description:
         '以流传于民间的女书为线索，展开对地域文化与女性书写传统的研究，延续品牌对本土文化基因的持续关注。',
-      image: '/images/milestone-2018.jpg',
+      image: img('/images/milestone-2018.jpg'),
       imageAlt: '女书文化研究影像',
     },
     {
@@ -226,7 +229,7 @@ export const milestones = {
       title: '大观定觉 · 当代东方美学系列',
       description:
         '以「大观定觉」为名推出当代东方美学系列，在传统与当代之间建立新的表达，进一步确立东方哲学式生活艺术。',
-      image: '/images/milestone-2023.jpg',
+      image: img('/images/milestone-2023.jpg'),
       imageAlt: '大观定觉系列影像',
     },
   ] as Milestone[],
@@ -239,7 +242,7 @@ export const heritage = {
     '传袭再造，是例外回望传统、面向当代的方法。自传统文化研究中提取基因，经工艺的转化，最终以当代时尚语言重新表达。让织物、针法与纹样不再停留于过去，而成为可穿着的当下生活。',
   video: {
     src: '',
-    poster: '/images/heritage-video.jpg',
+    poster: img('/images/heritage-video.jpg'),
     caption: '非遗工坊纪实 · 织造 / 染色 / 刺绣（资料待接入）',
   },
   stages: [
@@ -250,7 +253,7 @@ export const heritage = {
       description:
         '深入非遗源头，研究传统织造、染色、刺绣技艺的工艺谱系与文化基因。以田野考察与匠人访谈为方法，记录濒临遗忘的手艺，梳理其背后的地域记忆与审美逻辑，为设计确立可追溯的文化坐标。',
       keywords: ['非遗', '织造', '纹样'],
-      image: '/images/heritage-stage-1.jpg',
+      image: img('/images/heritage-stage-1.jpg'),
       imageAlt: '传统工艺研究纪实',
     },
     {
@@ -260,7 +263,7 @@ export const heritage = {
       description:
         '将传统工艺解构为可量产的设计语言，保留手作温度的同时融入现代制衣体系。在纹样、针法与材质之间反复推敲，使古老技艺适应当代穿着，又不失其本来的精神与手感。',
       keywords: ['解构', '手作', '现代制衣'],
-      image: '/images/heritage-stage-2.jpg',
+      image: img('/images/heritage-stage-2.jpg'),
       imageAlt: '工艺转化过程',
     },
     {
@@ -270,7 +273,7 @@ export const heritage = {
       description:
         '以当代美学重新诠释传统元素，让文化遗产以时装形态回到当代生活。传统不再是符号的堆叠，而是融入剪裁、质地与细节，成为可感知、可穿着的东方哲学式生活艺术。',
       keywords: ['当代美学', '时装', '生活艺术'],
-      image: '/images/heritage-stage-3.jpg',
+      image: img('/images/heritage-stage-3.jpg'),
       imageAlt: '当代东方时装表达',
     },
   ] as HeritageStage[],
